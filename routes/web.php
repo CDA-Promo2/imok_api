@@ -23,4 +23,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('customers/{id}', 'CustomerController@getOneById');
     $router->get('customers/find/{arg}', 'CustomerController@getWhere');
     $router->post('customers','CustomerController@create');
+
+    /**
+     * ROUTES FOR APPOINTMENTS
+     */
+    $router->get('appointments','AppointmentController@getAll');
+    $router->get('appointments/{id_customer}/{id_employees}/{date_start}', 'AppointmentController@getOneByIDs');
+    $router->get('appointments/find/{arg}', 'AppointmentController@getWhere');
+    $router->post('appointments','AppointmentController@create');
+    $router->put('appointments/{id_customer}/{id_employees}/{date_start}','AppointmentController@update');
 });
