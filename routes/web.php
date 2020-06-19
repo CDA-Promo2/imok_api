@@ -71,6 +71,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
      */
     $router->get('appointments','AppointmentController@getAll');
     $router->get('appointments/{id_customer}/{id_employees}/{date_start}', 'AppointmentController@getOneByIDs');
+    $router->get('appointments/customer/{id_customers}', 'AppointmentController@getByCustomer');
+    $router->get('appointments/employee/{id_employees}', 'AppointmentController@getByEmployee');
     $router->get('appointments/find/{arg}', 'AppointmentController@getWhere');
     $router->post('appointments','AppointmentController@create');
     $router->put('appointments/{id_customer}/{id_employees}/{date_start}','AppointmentController@update');

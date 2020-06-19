@@ -66,6 +66,48 @@ class AppointmentController extends Controller
     }
 
     /**
+     * GET APPOINTMENTS BY ITS EMPLOYEE
+     * @param $id_employees
+     * @return JsonResponse
+     */
+    public function getByEmployee($id_employees)
+    {
+        try {
+            $appointments = Appointment::where('id_employees', $id_employees)
+                                        ->get();
+            return response()->json([
+                'appointments' => $appointments
+            ], 200);
+        }catch(\Exception $e) {
+            return response()->json([
+                'message' => 'No match'
+            ], 404);
+        }
+    }
+
+    /**
+     * GET APPOINTMENTS BY ITS CUSTOMER
+     * @param $id_customers
+     * @return JsonResponse
+     */
+    public function getByCustomer($id_customers)
+    {
+        try {
+            $appointments = Appointment::where('id_customers', $id_customers)
+                ->get();
+            return response()->json([
+                'appointments' => $appointments
+            ], 200);
+        }catch(\Exception $e) {
+            return response()->json([
+                'message' => 'No match'
+            ], 404);
+        }
+    }
+
+
+
+    /**
      * GET A APPOINTMENT WHERE LIKE IN NAME OR MAIL
      * @param $arg
      * @return JsonResponse

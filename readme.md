@@ -12,8 +12,8 @@ API for IMOK web / desktop and mobile app
 
     Login / Logout
     --------------
-    POST    api/login                       => login ( requires mail & password )
-    POST    api/logout                      => logout
+    POST    api/auth/login                  => login ( requires mail & password )
+    POST    api/auth/logout                 => logout
     POST    api/refresh                     => regenerate token and invalidates current token
     POST    api/me                          => displays connected employee informations
     
@@ -29,7 +29,7 @@ API for IMOK web / desktop and mobile app
     ---------
     GET     api/estates/                  => get all estates
     GET     api/estates/id                => get one estate by id
-    GET     api/estates/attr/arg          => get estates containing argument in attribute
+    POST    api/estates/search            => get estates containing argument in attribute
     POST    api/estates/                  => create new estate
     PUT     api/estates/id                => update estate
 

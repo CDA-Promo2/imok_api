@@ -45,9 +45,14 @@ class CustomerController extends Controller
      */
     public function getAll()
     {
-        return response()->json([
-            'customers' => Customer::all()
-        ], 200);
+        try {
+            return response()->json([
+                'customers' => Customer::all()
+            ], 200);
+        }catch (\Exception $e) {
+            var_dump($e);
+            die;
+        }
     }
 
     /**

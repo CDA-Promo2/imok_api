@@ -99,13 +99,6 @@ class EstateController extends Controller
      */
     public function getWhere(Request $request)
     {
-//        var_dump($request->only(['city', 'minPrice', 'maxPrice', 'minSize', 'maxSize']));
-//        var_dump($request->input('city'));
-//        var_dump($request->input('minPrice'));
-//        var_dump($request->input('maxPrice'));
-//        var_dump($request->input('minSize'));
-//        var_dump($request->input('maxSize'));
-
         try{
             $estate = Estate::where('city', 'like', '%' . $request->input('city') . '%')->get();
             if($request->input('maxPrice')) {

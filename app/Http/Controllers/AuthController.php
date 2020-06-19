@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
@@ -29,7 +30,6 @@ class AuthController extends Controller
      * @throws ValidationException
      */
     public function login(Request $request){
-
         $this->validate($request,[
            'mail' => 'required|string',
            'password' => 'required|string'
@@ -43,7 +43,9 @@ class AuthController extends Controller
             ], 401);
         }
 
-        return $this->respondWithToken($token);
+        $user = Auth::user();
+
+        return $this->respondWithToken($token, $user);
     }
 
     /**
@@ -79,11 +81,12 @@ class AuthController extends Controller
      * @param $token
      * @return JsonResponse
      */
-    protected function respondWithToken($token){
+    protected function respondWithToken($token, $user){
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL()*60
+            'expires_in' => Auth::factory()->getTTL()*60,
+            'user' => $user
         ]);
     }
 
