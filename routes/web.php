@@ -57,7 +57,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('estates','EstateController@getAll');
     $router->get('estates/{id}', 'EstateController@getOneById');
     $router->post('estates/search', 'EstateController@getWhere');
-    $router->post('estates','EstateController@creatse');
+    $router->post('estates','EstateController@create');
     $router->put('estates/{id}', 'EstateController@update');
 
     /**
