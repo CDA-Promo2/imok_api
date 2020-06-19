@@ -30,7 +30,7 @@ API for IMOK web / desktop and mobile app
     GET     api/estates/                  => get all estates
     GET     api/estates/id                => get one estate by id
     POST    api/estates/search            => get estates containing argument in attribute
-    POST    api/estates/                  => create new estate
+    POST    api/estates/create            => create new estate
     PUT     api/estates/id                => update estate
 
     Appointments
