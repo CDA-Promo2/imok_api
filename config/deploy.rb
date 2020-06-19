@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.12.1"
+# lock "~> 3.12.1"
 
 set :application, "ImOk_API"
 set :repo_url, "https://github.com/CDA-Promo2/imok_api.git"
