@@ -193,6 +193,16 @@ class AppointmentController extends Controller
      *  summary="Create appointment",
      *  tags={"Appointments"},
      *  security={{"JWT":{}}},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    description="Each field is required",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="id_appointment_types", type="integer"),
+     *       @OA\Property(property="id_customers", type="integer"),
+     *       @OA\Property(property="id_employees", type="integer"),
+     *       @OA\Property(property="date_start", type="string", format="date"),
+     *    ),
+     *  ),
      *  @OA\Response(
      *    response=201,
      *    description="Appointment created",
@@ -247,6 +257,15 @@ class AppointmentController extends Controller
      *  summary="Update appointment",
      *  tags={"Appointments"},
      *  security={{"JWT":{}}},
+     *  @OA\RequestBody(
+     *    description="Fields that can be updated",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="id_appointment_types", type="integer"),
+     *       @OA\Property(property="id_customers", type="integer"),
+     *       @OA\Property(property="id_employees", type="integer"),
+     *       @OA\Property(property="date_start", type="string", format="date"),
+     *    ),
+     *  ),
      *  @OA\Response(
      *    response=201,
      *    description="Appointment updated",

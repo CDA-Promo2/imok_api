@@ -149,12 +149,16 @@ class CustomerController extends Controller
      *  security={{"JWT":{}}},
      *  @OA\RequestBody(
      *    required=true,
-     *    description="Pass user credentials",
      *    @OA\JsonContent(
-     *       required={"email","password"},
-     *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-     *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *       @OA\Property(property="persistent", type="boolean", example="true"),
+     *       required={"firstname", "lastname", "street", "phone", "id_marital_status", "id_cities", "civility", "birthdate"},
+     *       @OA\Property(property="firstname", type="string"),
+     *       @OA\Property(property="lastname", type="string"),
+     *       @OA\Property(property="street", type="string"),
+     *       @OA\Property(property="phone", type="string", example="0102030405"),
+     *       @OA\Property(property="id_marital_status", type="integer"),
+     *       @OA\Property(property="id_cities", type="integer"),
+     *       @OA\Property(property="civility", type="integer"),
+     *       @OA\Property(property="birthdate", type="string", format="date"),
      *    ),
      *  ),
      *  @OA\Response(
@@ -212,6 +216,19 @@ class CustomerController extends Controller
      *  summary="Update a customer",
      *  tags={"Customers"},
      *  security={{"JWT":{}}},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    @OA\JsonContent(
+     *       @OA\Property(property="firstname", type="string"),
+     *       @OA\Property(property="lastname", type="string"),
+     *       @OA\Property(property="street", type="string"),
+     *       @OA\Property(property="phone", type="string", example="0102030405"),
+     *       @OA\Property(property="id_marital_status", type="integer"),
+     *       @OA\Property(property="id_cities", type="integer"),
+     *       @OA\Property(property="civility", type="integer"),
+     *       @OA\Property(property="birthdate", type="string", format="date"),
+     *    ),
+     *  ),
      *  @OA\Response(
      *    response=404,
      *    description="Customer does not exist",

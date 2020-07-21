@@ -179,9 +179,12 @@ class EstateController extends Controller
      *  security={{"JWT":{}}},
      *  @OA\RequestBody(
      *    required=true,
-     *    description="Some arguments are required",
      *    @OA\JsonContent(
-     *       @OA\Property(property="customers_id", type="integer", example="1"),
+     *       required={"street", "id_cities", "id_customers", "id_estate_types"},
+     *       @OA\Property(property="street", type="string"),
+     *       @OA\Property(property="id_cities", type="integer"),
+     *       @OA\Property(property="id_customers", type="integer"),
+     *       @OA\Property(property="id_estate_types", type="integer"),
      *    ),
      *  ),
      *  @OA\Response(
@@ -238,6 +241,15 @@ class EstateController extends Controller
      *  summary="Update an estate",
      *  tags={"Estates"},
      *  security={{"JWT":{}}},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    @OA\JsonContent(
+     *       @OA\Property(property="street", type="string"),
+     *       @OA\Property(property="id_cities", type="integer"),
+     *       @OA\Property(property="id_customers", type="integer"),
+     *       @OA\Property(property="id_estate_types", type="integer"),
+     *    ),
+     *  ),
      *  @OA\Response(
      *    response=201,
      *    description="Estate updated",

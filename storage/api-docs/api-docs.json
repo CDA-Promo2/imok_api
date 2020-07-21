@@ -5,6 +5,12 @@
         "description": "This API is meant to be used along with the IMOK_Mobile and IMOK_Desktop apps. All routes require you to be authenticated, so your first step is to send your credentials to api/auth/login and get a bearer token.",
         "version": "0.1.0"
     },
+    "servers": [
+        {
+            "url": "http://imok.am.manusien-ecolelamanu.fr/imok_api/current/public/api",
+            "description": "API BASE PATH"
+        }
+    ],
     "paths": {
         "/appointments": {
             "get": {
@@ -40,6 +46,36 @@
                 ],
                 "summary": "Create appointment",
                 "operationId": "App\\Http\\Controllers\\AppointmentController::create",
+                "requestBody": {
+                    "description": "Each field is required",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_appointment_types": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_employees": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "date_start": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Appointment created"
@@ -89,6 +125,35 @@
                 ],
                 "summary": "Update appointment",
                 "operationId": "App\\Http\\Controllers\\AppointmentController::update",
+                "requestBody": {
+                    "description": "Fields that can be updated",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_appointment_types": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_employees": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "date_start": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Appointment updated"
@@ -162,6 +227,102 @@
                     },
                     "404": {
                         "description": "No appointment found"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login",
+                "operationId": "App\\Http\\Controllers\\AuthController::login",
+                "requestBody": {
+                    "description": "Each field is required",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "LOGIN",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "LOGIN",
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Logged in"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout",
+                "operationId": "App\\Http\\Controllers\\AuthController::logout",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh token",
+                "operationId": "App\\Http\\Controllers\\AuthController::refresh",
+                "responses": {
+                    "200": {
+                        "description": "Token refreshed"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/auth/me": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Who am I",
+                "operationId": "App\\Http\\Controllers\\AuthController::me",
+                "responses": {
+                    "200": {
+                        "description": "User"
                     }
                 },
                 "security": [
@@ -299,32 +460,54 @@
                 "summary": "Create a new customer",
                 "operationId": "App\\Http\\Controllers\\CustomerController::create",
                 "requestBody": {
-                    "description": "Pass user credentials",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "email",
-                                    "password"
+                                    "firstname",
+                                    "lastname",
+                                    "street",
+                                    "phone",
+                                    "id_marital_status",
+                                    "id_cities",
+                                    "civility",
+                                    "birthdate"
                                 ],
                                 "properties": {
-                                    "email": {
+                                    "firstname": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "phone": {
                                         "description": "CREATE A NEW CUSTOMER",
                                         "type": "string",
-                                        "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "0102030405"
                                     },
-                                    "password": {
+                                    "id_marital_status": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "id_cities": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "civility": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "birthdate": {
                                         "description": "CREATE A NEW CUSTOMER",
                                         "type": "string",
-                                        "format": "password",
-                                        "example": "PassWord12345"
-                                    },
-                                    "persistent": {
-                                        "description": "CREATE A NEW CUSTOMER",
-                                        "type": "boolean",
-                                        "example": "true"
+                                        "format": "date"
                                     }
                                 },
                                 "type": "object"
@@ -381,6 +564,52 @@
                 ],
                 "summary": "Update a customer",
                 "operationId": "App\\Http\\Controllers\\CustomerController::update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "firstname": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string",
+                                        "example": "0102030405"
+                                    },
+                                    "id_marital_status": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "id_cities": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "civility": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "birthdate": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "404": {
                         "description": "Customer does not exist"
@@ -466,16 +695,32 @@
                 "summary": "Create estate",
                 "operationId": "App\\Http\\Controllers\\EstateController::create",
                 "requestBody": {
-                    "description": "Some arguments are required",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "street",
+                                    "id_cities",
+                                    "id_customers",
+                                    "id_estate_types"
+                                ],
                                 "properties": {
-                                    "customers_id": {
+                                    "street": {
                                         "description": "CREATE A NEW ESTATE",
-                                        "type": "integer",
-                                        "example": "1"
+                                        "type": "string"
+                                    },
+                                    "id_cities": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_estate_types": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -532,6 +777,34 @@
                 ],
                 "summary": "Update an estate",
                 "operationId": "App\\Http\\Controllers\\EstateController::update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "street": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "string"
+                                    },
+                                    "id_cities": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_estate_types": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Estate updated"
