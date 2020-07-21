@@ -1,0 +1,1235 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IMOK Api",
+        "description": "This API is meant to be used along with the IMOK_Mobile and IMOK_Desktop apps. All routes require you to be authenticated, so your first step is to send your credentials to api/auth/login and get a bearer token.",
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "http://imok.am.manusien-ecolelamanu.fr/imok_api/current/public/api",
+            "description": "API BASE PATH"
+        }
+    ],
+    "paths": {
+        "/appointments": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get all appointments",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getAll",
+                "responses": {
+                    "200": {
+                        "description": "Appointments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Create appointment",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::create",
+                "requestBody": {
+                    "description": "Each field is required",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_appointment_types": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_employees": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "date_start": {
+                                        "description": "CREATE A NEW APPOINTMENT",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Appointment created"
+                    },
+                    "409": {
+                        "description": "Appointment could not be created"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/appointements/{id_employees}/{id_customers}/{date_start}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get appointment",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getOneByIDs",
+                "responses": {
+                    "200": {
+                        "description": "Appointment",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointment"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Appointment not found"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Update appointment",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::update",
+                "requestBody": {
+                    "description": "Fields that can be updated",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_appointment_types": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "id_employees": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "integer"
+                                    },
+                                    "date_start": {
+                                        "description": "UPDATE A APPOINTMENT",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Appointment updated"
+                    },
+                    "404": {
+                        "description": "Appointment not found"
+                    },
+                    "409": {
+                        "description": "Appointment cound not be updated"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/appointments/{id_employees}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get employee's appointments",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getByEmployee",
+                "responses": {
+                    "200": {
+                        "description": "Appointments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No appointment found"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/appointments/{id_customers}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get customer's appointments",
+                "operationId": "App\\Http\\Controllers\\AppointmentController::getByCustomer",
+                "responses": {
+                    "200": {
+                        "description": "Appointments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No appointment found"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login",
+                "operationId": "App\\Http\\Controllers\\AuthController::login",
+                "requestBody": {
+                    "description": "Each field is required",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "LOGIN",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "LOGIN",
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Logged in"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout",
+                "operationId": "App\\Http\\Controllers\\AuthController::logout",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh token",
+                "operationId": "App\\Http\\Controllers\\AuthController::refresh",
+                "responses": {
+                    "200": {
+                        "description": "Token refreshed"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/auth/me": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Who am I",
+                "operationId": "App\\Http\\Controllers\\AuthController::me",
+                "responses": {
+                    "200": {
+                        "description": "User"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/cities/{id}": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Get city by its ID",
+                "operationId": "App\\Http\\Controllers\\CityController::getById",
+                "responses": {
+                    "200": {
+                        "description": "City",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/City"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/cities/{attribute}/{value}": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Get city by any attribute",
+                "operationId": "App\\Http\\Controllers\\CityController::getByAttr",
+                "responses": {
+                    "200": {
+                        "description": "Cities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/City"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No result"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/cities/search/{value}": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Search city by name or zipcode",
+                "operationId": "App\\Http\\Controllers\\CityController::search",
+                "responses": {
+                    "200": {
+                        "description": "Cities",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/City"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No result"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/customers": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get all customers",
+                "operationId": "App\\Http\\Controllers\\CustomerController::getAll",
+                "responses": {
+                    "200": {
+                        "description": "Customers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Create a new customer",
+                "operationId": "App\\Http\\Controllers\\CustomerController::create",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "firstname",
+                                    "lastname",
+                                    "street",
+                                    "phone",
+                                    "id_marital_status",
+                                    "id_cities",
+                                    "civility",
+                                    "birthdate"
+                                ],
+                                "properties": {
+                                    "firstname": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string",
+                                        "example": "0102030405"
+                                    },
+                                    "id_marital_status": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "id_cities": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "civility": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "birthdate": {
+                                        "description": "CREATE A NEW CUSTOMER",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "409": {
+                        "description": "Customer could not be created"
+                    },
+                    "201": {
+                        "description": "Customer created"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/customers/{id}": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get a customer",
+                "operationId": "App\\Http\\Controllers\\CustomerController::getOneById",
+                "responses": {
+                    "404": {
+                        "description": "Customer does not exist"
+                    },
+                    "200": {
+                        "description": "Customer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Update a customer",
+                "operationId": "App\\Http\\Controllers\\CustomerController::update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "firstname": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string",
+                                        "example": "0102030405"
+                                    },
+                                    "id_marital_status": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "id_cities": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "civility": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "integer"
+                                    },
+                                    "birthdate": {
+                                        "description": "UPDATE A CUSTOMER",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Customer does not exist"
+                    },
+                    "409": {
+                        "description": "Customer could not be updated"
+                    },
+                    "201": {
+                        "description": "Customer updated"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/customers/find/{argument}": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get a customer where argument can be found in name or mail",
+                "operationId": "App\\Http\\Controllers\\CustomerController::getWhere",
+                "responses": {
+                    "404": {
+                        "description": "No customer found"
+                    },
+                    "200": {
+                        "description": "Matching customer(s)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/estates": {
+            "get": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Get all estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::getAll",
+                "responses": {
+                    "200": {
+                        "description": "Estates",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Estate"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Create estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::create",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "street",
+                                    "id_cities",
+                                    "id_customers",
+                                    "id_estate_types"
+                                ],
+                                "properties": {
+                                    "street": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "string"
+                                    },
+                                    "id_cities": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_estate_types": {
+                                        "description": "CREATE A NEW ESTATE",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estate created"
+                    },
+                    "409": {
+                        "description": "Estate could not be created"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/estates/{id}": {
+            "get": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Get estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::getOneById",
+                "responses": {
+                    "200": {
+                        "description": "Estate",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estate"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Estate not found"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Update an estate",
+                "operationId": "App\\Http\\Controllers\\EstateController::update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "street": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "string"
+                                    },
+                                    "id_cities": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_customers": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "integer"
+                                    },
+                                    "id_estate_types": {
+                                        "description": "UPDATE AN ESTATE",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estate updated"
+                    },
+                    "404": {
+                        "description": "Estate not found"
+                    },
+                    "409": {
+                        "description": "Estate could not be updated"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        },
+        "/estates/search": {
+            "post": {
+                "tags": [
+                    "Estates"
+                ],
+                "summary": "Search estate with matching argument",
+                "operationId": "App\\Http\\Controllers\\EstateController::getWhere",
+                "requestBody": {
+                    "description": "Pass any of these arguments",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "city": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "amiens"
+                                    },
+                                    "minBudget": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "10000"
+                                    },
+                                    "maxBudget": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "999999"
+                                    },
+                                    "minSize": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "30"
+                                    },
+                                    "maxSize": {
+                                        "description": "GET AN ESTATE WHERE LIKE IN ATTR",
+                                        "type": "string",
+                                        "example": "300"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Matching Estates",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Estate"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No matching Estate found"
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Appointment": {
+                "title": "Appointment",
+                "properties": {
+                    "date_start": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "note": {
+                        "type": "string"
+                    },
+                    "feedback": {
+                        "type": "string"
+                    },
+                    "id_appointment_types": {
+                        "type": "integer"
+                    },
+                    "id_customers": {
+                        "type": "integer"
+                    },
+                    "id_employees": {
+                        "type": "integer"
+                    },
+                    "customer_firstname": {
+                        "type": "string"
+                    },
+                    "customer_lastname": {
+                        "type": "string"
+                    },
+                    "employee_firstname": {
+                        "type": "string"
+                    },
+                    "employee_lastname": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "City": {
+                "title": "City",
+                "properties": {
+                    "department_code": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "insee_code": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "zip_code": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "slug": {
+                        "description": "Class City",
+                        "type": "string"
+                    },
+                    "gps_lat": {
+                        "description": "Class City",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "gps_lng": {
+                        "description": "Class City",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "Customer": {
+                "title": "Customer",
+                "properties": {
+                    "firstname": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "street": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "complement": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "mail": {
+                        "description": "Class Customer",
+                        "type": "email"
+                    },
+                    "id_marital_status": {
+                        "description": "Class Customer",
+                        "type": "integer"
+                    },
+                    "id_cities": {
+                        "description": "Class Customer",
+                        "type": "integer"
+                    },
+                    "civility": {
+                        "description": "Class Customer",
+                        "type": "integer"
+                    },
+                    "birthdate": {
+                        "description": "Class Customer",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "date_register": {
+                        "description": "Class Customer",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "zip_code": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    },
+                    "marital_status": {
+                        "description": "Class Customer",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Estate": {
+                "title": "Estate",
+                "properties": {
+                    "id": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "rooms": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "facilities": {
+                        "description": "Class Estate",
+                        "type": "object"
+                    },
+                    "street": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "complement": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "room_numbers": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "bedroom_numbers": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "joint-ownership": {
+                        "description": "Class Estate",
+                        "type": "boolean"
+                    },
+                    "annual_fees": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "price": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "rent": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "condominium": {
+                        "description": "Class Estate",
+                        "type": "boolean"
+                    },
+                    "condominium_fees": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "property_tax": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "housing_tax": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "energy_consumption": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "gas_emission": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "size": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "carrez_size": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "floor": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "floor_number": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "renovation": {
+                        "description": "Class Estate",
+                        "type": "boolean"
+                    },
+                    "id_customers": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_build_Dates": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_outside_conditions": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_heating_types": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_districts": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_expositions": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_cities": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "id_estate_types": {
+                        "description": "Class Estate",
+                        "type": "integer"
+                    },
+                    "period": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "zip_code": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "city_lat": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "cities_lng": {
+                        "description": "Class Estate",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "owner_firsname": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "owner_lastname": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "exposition": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "heating_type": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "notes": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "outside_condition": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    },
+                    "estate_type": {
+                        "description": "Class Estate",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "description": "JWT Auth Token",
+                "name": "JWT",
+                "in": "header"
+            }
+        }
+    }
+}
