@@ -18,7 +18,7 @@ namespace :deploy do
             within release_path  do
                 execute :composer, "install --no-dev --quiet" # install dependencies
                 execute :chmod, "u+x artisan" # make artisan executable
-                execute :php, "artisan swagger-lume:publish-views" #generate api documentation
+                execute :chmod, "-R 775 storage"
                 execute :php, "artisan swagger-lume:generate" #generate api documentation
             end
         end
