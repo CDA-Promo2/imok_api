@@ -2850,3 +2850,178 @@
   INFO [8aa05ba2] Running /usr/bin/env php vendor/bin/phpunit as am_armanddimok@54.37.71.121
  DEBUG [8aa05ba2] Command: cd /var/www/clients/client51/web49/web/imok_api/releases/20200724094748 && /usr/bin/env php vendor/bin/phpunit
  DEBUG [8aa05ba2] 	Could not open input file: vendor/bin/phpunit
+  INFO ---------------------------------------------------------------------------
+  INFO START 2020-07-24 12:20:04 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [74159915] Running /usr/bin/env mkdir -p /tmp as am_armanddimok@54.37.71.121
+ DEBUG [74159915] Command: /usr/bin/env mkdir -p /tmp
+  INFO [74159915] Finished in 0.345 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-ImOk_API-production-sebastien.sh 0.0%
+  INFO Uploading /tmp/git-ssh-ImOk_API-production-sebastien.sh 100.0%
+  INFO [4a624efb] Running /usr/bin/env chmod 700 /tmp/git-ssh-ImOk_API-production-sebastien.sh as am_armanddimok@54.37.71.121
+ DEBUG [4a624efb] Command: /usr/bin/env chmod 700 /tmp/git-ssh-ImOk_API-production-sebastien.sh
+  INFO [4a624efb] Finished in 0.102 seconds with exit status 0 (successful).
+  INFO [661bcb82] Running /usr/bin/env git ls-remote https://github.com/CDA-Promo2/imok_api.git HEAD as am_armanddimok@54.37.71.121
+ DEBUG [661bcb82] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git ls-remote https://github.com/CDA-Promo2/imok_api.git HEAD )
+ DEBUG [661bcb82] 	4f846a54c6bbe12084b3ad3790172332f73da756	HEAD
+  INFO [661bcb82] Finished in 0.649 seconds with exit status 0 (successful).
+  INFO [68a674b8] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared /var/www/clients/client51/web49/web/imok_api/releases as am_armanddimok@54.37.71.121
+ DEBUG [68a674b8] Command: /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared /var/www/clients/client51/web49/web/imok_api/releases
+  INFO [68a674b8] Finished in 0.099 seconds with exit status 0 (successful).
+  INFO [b4680a9f] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared as am_armanddimok@54.37.71.121
+ DEBUG [b4680a9f] Command: /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared
+  INFO [b4680a9f] Finished in 0.100 seconds with exit status 0 (successful).
+ DEBUG [47547f25] Running [ -f /var/www/clients/client51/web49/web/imok_api/shared/.env ] as am_armanddimok@54.37.71.121
+ DEBUG [47547f25] Command: [ -f /var/www/clients/client51/web49/web/imok_api/shared/.env ]
+ DEBUG [47547f25] Finished in 0.097 seconds with exit status 0 (successful).
+ DEBUG [02895d0d] Running [ -f /var/www/clients/client51/web49/web/imok_api/current/REVISION ] as am_armanddimok@54.37.71.121
+ DEBUG [02895d0d] Command: [ -f /var/www/clients/client51/web49/web/imok_api/current/REVISION ]
+ DEBUG [02895d0d] Finished in 0.097 seconds with exit status 0 (successful).
+ DEBUG [47b4e174] Running /usr/bin/env cat /var/www/clients/client51/web49/web/imok_api/current/REVISION 2>/dev/null as am_armanddimok@54.37.71.121
+ DEBUG [47b4e174] Command: /usr/bin/env cat /var/www/clients/client51/web49/web/imok_api/current/REVISION 2>/dev/null
+ DEBUG [47b4e174] 	1a65f136f3999cf8270f0a5b76a977bebd7222be
+ DEBUG [47b4e174] Finished in 0.100 seconds with exit status 0 (successful).
+ DEBUG [f6f60248] Running [ -f /var/www/clients/client51/web49/web/imok_api/repo/HEAD ] as am_armanddimok@54.37.71.121
+ DEBUG [f6f60248] Command: [ -f /var/www/clients/client51/web49/web/imok_api/repo/HEAD ]
+ DEBUG [f6f60248] Finished in 0.096 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/clients/client51/web49/web/imok_api/repo
+ DEBUG [ea96f5ed] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [ea96f5ed] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi
+ DEBUG [ea96f5ed] Finished in 0.097 seconds with exit status 0 (successful).
+  INFO [eefd7e8f] Running /usr/bin/env git remote set-url origin https://github.com/CDA-Promo2/imok_api.git as am_armanddimok@54.37.71.121
+ DEBUG [eefd7e8f] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git remote set-url origin https://github.com/CDA-Promo2/imok_api.git )
+  INFO [eefd7e8f] Finished in 0.101 seconds with exit status 0 (successful).
+  INFO [e5803d0e] Running /usr/bin/env git remote update --prune as am_armanddimok@54.37.71.121
+ DEBUG [e5803d0e] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [e5803d0e] 	Récupération de origin
+ DEBUG [e5803d0e] 	Depuis https://github.com/CDA-Promo2/imok_api
+   1a65f13..4f846a5  master            -> master
+ DEBUG [e5803d0e] 	 + 88ca55d...ba7158f refs/pull/3/merge -> refs/pull/3/merge  (mise à jour forcée)
+  INFO [e5803d0e] Finished in 1.355 seconds with exit status 0 (successful).
+ DEBUG [8f1e73c4] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [8f1e73c4] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi
+ DEBUG [8f1e73c4] Finished in 0.052 seconds with exit status 0 (successful).
+  INFO [70407d49] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724102006 as am_armanddimok@54.37.71.121
+ DEBUG [70407d49] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724102006 )
+  INFO [70407d49] Finished in 0.104 seconds with exit status 0 (successful).
+  INFO [eb64541e] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/clients/client51/web49/web/imok_api/releases/20200724102006 as am_armanddimok@54.37.71.121
+ DEBUG [eb64541e] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/clients/client51/web49/web/imok_api/releases/20200724102006 )
+  INFO [eb64541e] Finished in 0.968 seconds with exit status 0 (successful).
+ DEBUG [b8b9241c] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [b8b9241c] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi
+ DEBUG [b8b9241c] Finished in 0.102 seconds with exit status 0 (successful).
+ DEBUG [fafd294e] Running /usr/bin/env git rev-list --max-count=1 master as am_armanddimok@54.37.71.121
+ DEBUG [fafd294e] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [fafd294e] 	4f846a54c6bbe12084b3ad3790172332f73da756
+ DEBUG [fafd294e] Finished in 0.101 seconds with exit status 0 (successful).
+ DEBUG [228e94b2] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724102006; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724102006'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [228e94b2] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724102006; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724102006'" 1>&2; false; fi
+ DEBUG [228e94b2] Finished in 0.098 seconds with exit status 0 (successful).
+  INFO [e9107f49] Running /usr/bin/env echo "4f846a54c6bbe12084b3ad3790172332f73da756" > REVISION as am_armanddimok@54.37.71.121
+ DEBUG [e9107f49] Command: cd /var/www/clients/client51/web49/web/imok_api/releases/20200724102006 && /usr/bin/env echo "4f846a54c6bbe12084b3ad3790172332f73da756" > REVISION
+  INFO [e9107f49] Finished in 0.099 seconds with exit status 0 (successful).
+  INFO [a4d3717f] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724102006 as am_armanddimok@54.37.71.121
+ DEBUG [a4d3717f] Command: /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724102006
+  INFO [a4d3717f] Finished in 0.099 seconds with exit status 0 (successful).
+ DEBUG [21d773c3] Running [ -L /var/www/clients/client51/web49/web/imok_api/releases/20200724102006/.env ] as am_armanddimok@54.37.71.121
+ DEBUG [21d773c3] Command: [ -L /var/www/clients/client51/web49/web/imok_api/releases/20200724102006/.env ]
+ DEBUG [21d773c3] Finished in 0.094 seconds with exit status 1 (failed).
+ DEBUG [4c761891] Running [ -f /var/www/clients/client51/web49/web/imok_api/releases/20200724102006/.env ] as am_armanddimok@54.37.71.121
+ DEBUG [4c761891] Command: [ -f /var/www/clients/client51/web49/web/imok_api/releases/20200724102006/.env ]
+ DEBUG [4c761891] Finished in 0.098 seconds with exit status 1 (failed).
+  INFO [387f0fb6] Running /usr/bin/env ln -s /var/www/clients/client51/web49/web/imok_api/shared/.env /var/www/clients/client51/web49/web/imok_api/releases/20200724102006/.env as am_armanddimok@54.37.71.121
+ DEBUG [387f0fb6] Command: /usr/bin/env ln -s /var/www/clients/client51/web49/web/imok_api/shared/.env /var/www/clients/client51/web49/web/imok_api/releases/20200724102006/.env
+  INFO [387f0fb6] Finished in 0.101 seconds with exit status 0 (successful).
+ DEBUG [4e7e9333] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724102006; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724102006'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [4e7e9333] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724102006; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724102006'" 1>&2; false; fi
+ DEBUG [4e7e9333] Finished in 0.097 seconds with exit status 0 (successful).
+  INFO [b8785941] Running /usr/bin/env composer install --no-dev --quiet as am_armanddimok@54.37.71.121
+ DEBUG [b8785941] Command: cd /var/www/clients/client51/web49/web/imok_api/releases/20200724102006 && /usr/bin/env composer install --no-dev --quiet
+ DEBUG [b8785941] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. Run update to update them.
+ DEBUG [b8785941] 	Your requirements could not be resolved to an installable set of packages.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2020-07-24 13:34:41 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [c7c94d1e] Running /usr/bin/env mkdir -p /tmp as am_armanddimok@54.37.71.121
+ DEBUG [c7c94d1e] Command: /usr/bin/env mkdir -p /tmp
+  INFO [c7c94d1e] Finished in 0.324 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-ImOk_API-production-sebastien.sh 0.0%
+  INFO Uploading /tmp/git-ssh-ImOk_API-production-sebastien.sh 100.0%
+  INFO [cff7f157] Running /usr/bin/env chmod 700 /tmp/git-ssh-ImOk_API-production-sebastien.sh as am_armanddimok@54.37.71.121
+ DEBUG [cff7f157] Command: /usr/bin/env chmod 700 /tmp/git-ssh-ImOk_API-production-sebastien.sh
+  INFO [cff7f157] Finished in 0.104 seconds with exit status 0 (successful).
+  INFO [0afbb526] Running /usr/bin/env git ls-remote https://github.com/CDA-Promo2/imok_api.git HEAD as am_armanddimok@54.37.71.121
+ DEBUG [0afbb526] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git ls-remote https://github.com/CDA-Promo2/imok_api.git HEAD )
+ DEBUG [0afbb526] 	4f846a54c6bbe12084b3ad3790172332f73da756	HEAD
+  INFO [0afbb526] Finished in 0.627 seconds with exit status 0 (successful).
+  INFO [d67eda91] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared /var/www/clients/client51/web49/web/imok_api/releases as am_armanddimok@54.37.71.121
+ DEBUG [d67eda91] Command: /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared /var/www/clients/client51/web49/web/imok_api/releases
+  INFO [d67eda91] Finished in 0.043 seconds with exit status 0 (successful).
+  INFO [0301c023] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared as am_armanddimok@54.37.71.121
+ DEBUG [0301c023] Command: /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/shared
+  INFO [0301c023] Finished in 0.098 seconds with exit status 0 (successful).
+ DEBUG [c199b30d] Running [ -f /var/www/clients/client51/web49/web/imok_api/shared/.env ] as am_armanddimok@54.37.71.121
+ DEBUG [c199b30d] Command: [ -f /var/www/clients/client51/web49/web/imok_api/shared/.env ]
+ DEBUG [c199b30d] Finished in 0.100 seconds with exit status 0 (successful).
+ DEBUG [c3b3acf9] Running [ -f /var/www/clients/client51/web49/web/imok_api/current/REVISION ] as am_armanddimok@54.37.71.121
+ DEBUG [c3b3acf9] Command: [ -f /var/www/clients/client51/web49/web/imok_api/current/REVISION ]
+ DEBUG [c3b3acf9] Finished in 0.098 seconds with exit status 0 (successful).
+ DEBUG [d9fe224e] Running /usr/bin/env cat /var/www/clients/client51/web49/web/imok_api/current/REVISION 2>/dev/null as am_armanddimok@54.37.71.121
+ DEBUG [d9fe224e] Command: /usr/bin/env cat /var/www/clients/client51/web49/web/imok_api/current/REVISION 2>/dev/null
+ DEBUG [d9fe224e] 	1a65f136f3999cf8270f0a5b76a977bebd7222be
+ DEBUG [d9fe224e] Finished in 0.112 seconds with exit status 0 (successful).
+ DEBUG [5cdc1935] Running [ -f /var/www/clients/client51/web49/web/imok_api/repo/HEAD ] as am_armanddimok@54.37.71.121
+ DEBUG [5cdc1935] Command: [ -f /var/www/clients/client51/web49/web/imok_api/repo/HEAD ]
+ DEBUG [5cdc1935] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/clients/client51/web49/web/imok_api/repo
+ DEBUG [24c9ddc5] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [24c9ddc5] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi
+ DEBUG [24c9ddc5] Finished in 0.089 seconds with exit status 0 (successful).
+  INFO [c2795b95] Running /usr/bin/env git remote set-url origin https://github.com/CDA-Promo2/imok_api.git as am_armanddimok@54.37.71.121
+ DEBUG [c2795b95] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git remote set-url origin https://github.com/CDA-Promo2/imok_api.git )
+  INFO [c2795b95] Finished in 0.174 seconds with exit status 0 (successful).
+  INFO [1e8d91cd] Running /usr/bin/env git remote update --prune as am_armanddimok@54.37.71.121
+ DEBUG [1e8d91cd] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [1e8d91cd] 	Récupération de origin
+  INFO [1e8d91cd] Finished in 0.599 seconds with exit status 0 (successful).
+ DEBUG [c11faad2] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [c11faad2] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi
+ DEBUG [c11faad2] Finished in 0.101 seconds with exit status 0 (successful).
+  INFO [68c3e18c] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724113443 as am_armanddimok@54.37.71.121
+ DEBUG [68c3e18c] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724113443 )
+  INFO [68c3e18c] Finished in 0.106 seconds with exit status 0 (successful).
+  INFO [d998e4b1] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/clients/client51/web49/web/imok_api/releases/20200724113443 as am_armanddimok@54.37.71.121
+ DEBUG [d998e4b1] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/clients/client51/web49/web/imok_api/releases/20200724113443 )
+  INFO [d998e4b1] Finished in 0.271 seconds with exit status 0 (successful).
+ DEBUG [521d994d] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [521d994d] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/repo; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/repo'" 1>&2; false; fi
+ DEBUG [521d994d] Finished in 0.100 seconds with exit status 0 (successful).
+ DEBUG [c1a2c339] Running /usr/bin/env git rev-list --max-count=1 master as am_armanddimok@54.37.71.121
+ DEBUG [c1a2c339] Command: cd /var/www/clients/client51/web49/web/imok_api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ImOk_API-production-sebastien.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [c1a2c339] 	4f846a54c6bbe12084b3ad3790172332f73da756
+ DEBUG [c1a2c339] Finished in 0.104 seconds with exit status 0 (successful).
+ DEBUG [ec7f86d4] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724113443; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724113443'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [ec7f86d4] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724113443; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724113443'" 1>&2; false; fi
+ DEBUG [ec7f86d4] Finished in 0.105 seconds with exit status 0 (successful).
+  INFO [72fc2d8e] Running /usr/bin/env echo "4f846a54c6bbe12084b3ad3790172332f73da756" > REVISION as am_armanddimok@54.37.71.121
+ DEBUG [72fc2d8e] Command: cd /var/www/clients/client51/web49/web/imok_api/releases/20200724113443 && /usr/bin/env echo "4f846a54c6bbe12084b3ad3790172332f73da756" > REVISION
+  INFO [72fc2d8e] Finished in 0.107 seconds with exit status 0 (successful).
+  INFO [e7f8751e] Running /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724113443 as am_armanddimok@54.37.71.121
+ DEBUG [e7f8751e] Command: /usr/bin/env mkdir -p /var/www/clients/client51/web49/web/imok_api/releases/20200724113443
+  INFO [e7f8751e] Finished in 0.100 seconds with exit status 0 (successful).
+ DEBUG [56c868e2] Running [ -L /var/www/clients/client51/web49/web/imok_api/releases/20200724113443/.env ] as am_armanddimok@54.37.71.121
+ DEBUG [56c868e2] Command: [ -L /var/www/clients/client51/web49/web/imok_api/releases/20200724113443/.env ]
+ DEBUG [56c868e2] Finished in 0.111 seconds with exit status 1 (failed).
+ DEBUG [43de4deb] Running [ -f /var/www/clients/client51/web49/web/imok_api/releases/20200724113443/.env ] as am_armanddimok@54.37.71.121
+ DEBUG [43de4deb] Command: [ -f /var/www/clients/client51/web49/web/imok_api/releases/20200724113443/.env ]
+ DEBUG [43de4deb] Finished in 0.126 seconds with exit status 1 (failed).
+  INFO [9f1b771c] Running /usr/bin/env ln -s /var/www/clients/client51/web49/web/imok_api/shared/.env /var/www/clients/client51/web49/web/imok_api/releases/20200724113443/.env as am_armanddimok@54.37.71.121
+ DEBUG [9f1b771c] Command: /usr/bin/env ln -s /var/www/clients/client51/web49/web/imok_api/shared/.env /var/www/clients/client51/web49/web/imok_api/releases/20200724113443/.env
+  INFO [9f1b771c] Finished in 0.106 seconds with exit status 0 (successful).
+ DEBUG [f028984a] Running if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724113443; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724113443'" 1>&2; false; fi as am_armanddimok@54.37.71.121
+ DEBUG [f028984a] Command: if test ! -d /var/www/clients/client51/web49/web/imok_api/releases/20200724113443; then echo "Directory does not exist '/var/www/clients/client51/web49/web/imok_api/releases/20200724113443'" 1>&2; false; fi
+ DEBUG [f028984a] Finished in 0.100 seconds with exit status 0 (successful).
+  INFO [64a90d6e] Running /usr/bin/env composer install --no-dev --quiet as am_armanddimok@54.37.71.121
+ DEBUG [64a90d6e] Command: cd /var/www/clients/client51/web49/web/imok_api/releases/20200724113443 && /usr/bin/env composer install --no-dev --quiet
+ DEBUG [64a90d6e] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. Run update to update them.
+ DEBUG [64a90d6e] 	Your requirements could not be resolved to an installable set of packages.
