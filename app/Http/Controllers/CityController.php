@@ -22,6 +22,20 @@ class CityController extends Controller
      * GET CITY BY ID
      * @param $id
      * @return JsonResponse
+     * @OA\Get(path="/cities/{id}",
+     *  summary="Get city by its ID",
+     *  tags={"Cities"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=200,
+     *    description="City",
+     *    @OA\MediaType(mediaType="application/json",@OA\Schema(ref="#/components/schemas/City"))
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="Not found",
+     *  )
+     * )
      */
     public function getById($id){
         try{
@@ -44,6 +58,20 @@ class CityController extends Controller
      * @param $attr
      * @param $arg
      * @return JsonResponse
+     * @OA\Get(path="/cities/{attribute}/{value}",
+     *  summary="Get city by any attribute",
+     *  tags={"Cities"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Cities",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/City")),
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="No result",
+     *  )
+     * )
      */
     public function getByAttr($attr,$arg){
         try{
@@ -64,6 +92,20 @@ class CityController extends Controller
      * SEARCH CITIES BY ZIPCODE OR NAME
      * @param $arg
      * @return JsonResponse
+     * @OA\Get(path="/cities/search/{value}",
+     *  summary="Search city by name or zipcode",
+     *  tags={"Cities"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Cities",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/City")),
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="No result",
+     *  )
+     * )
      */
     public function search($arg){
         if(strlen($arg)<2){

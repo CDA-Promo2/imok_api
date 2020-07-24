@@ -42,6 +42,16 @@ class CustomerController extends Controller
     /**
      * GET ALL CUSTOMERS
      * @return JsonResponse
+     * @OA\Get(path="/customers",
+     *  summary="Get all customers",
+     *  tags={"Customers"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Customers",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Customer")),
+     *  )
+     * )
      */
     public function getAll()
     {
@@ -59,6 +69,20 @@ class CustomerController extends Controller
      * GET A CUSTOMER BY ITS ID
      * @param $id
      * @return JsonResponse
+     * @OA\Get(path="/customers/{id}",
+     *  summary="Get a customer",
+     *  tags={"Customers"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=404,
+     *    description="Customer does not exist",
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Customer",
+     *    @OA\MediaType(mediaType="application/json",@OA\Schema(ref="#/components/schemas/Customer"))
+     *  )
+     * )
      */
     public function getOneById($id)
     {
@@ -79,6 +103,20 @@ class CustomerController extends Controller
      * GET A CUSTOMER WHERE LIKE IN NAME OR MAIL
      * @param $arg
      * @return JsonResponse
+     * @OA\Get(path="/customers/find/{argument}",
+     *  summary="Get a customer where argument can be found in name or mail",
+     *  tags={"Customers"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=404,
+     *    description="No customer found",
+     *    ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Matching customer(s)",
+     *    @OA\JsonContent(type="array",@OA\Items(ref="#/components/schemas/Customer")),
+     *  )
+     * )
      */
     public function getWhere($arg)
     {
@@ -105,6 +143,33 @@ class CustomerController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Post(path="/customers",
+     *  summary="Create a new customer",
+     *  tags={"Customers"},
+     *  security={{"JWT":{}}},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    @OA\JsonContent(
+     *       required={"firstname", "lastname", "street", "phone", "id_marital_status", "id_cities", "civility", "birthdate"},
+     *       @OA\Property(property="firstname", type="string"),
+     *       @OA\Property(property="lastname", type="string"),
+     *       @OA\Property(property="street", type="string"),
+     *       @OA\Property(property="phone", type="string", example="0102030405"),
+     *       @OA\Property(property="id_marital_status", type="integer"),
+     *       @OA\Property(property="id_cities", type="integer"),
+     *       @OA\Property(property="civility", type="integer"),
+     *       @OA\Property(property="birthdate", type="string", format="date"),
+     *    ),
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Customer could not be created",
+     *  ),
+     *  @OA\Response(
+     *    response=201,
+     *    description="Customer created",
+     *  )
+     * )
      */
     public function create(Request $request){
 
@@ -147,6 +212,36 @@ class CustomerController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Put(path="/customers/{id}",
+     *  summary="Update a customer",
+     *  tags={"Customers"},
+     *  security={{"JWT":{}}},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    @OA\JsonContent(
+     *       @OA\Property(property="firstname", type="string"),
+     *       @OA\Property(property="lastname", type="string"),
+     *       @OA\Property(property="street", type="string"),
+     *       @OA\Property(property="phone", type="string", example="0102030405"),
+     *       @OA\Property(property="id_marital_status", type="integer"),
+     *       @OA\Property(property="id_cities", type="integer"),
+     *       @OA\Property(property="civility", type="integer"),
+     *       @OA\Property(property="birthdate", type="string", format="date"),
+     *    ),
+     *  ),
+     *  @OA\Response(
+     *    response=404,
+     *    description="Customer does not exist",
+     *  ),
+     *  @OA\Response(
+     *    response=409,
+     *    description="Customer could not be updated",
+     *  ),
+     *  @OA\Response(
+     *    response=201,
+     *    description="Customer updated",
+     *  )
+     * )
      */
     public function update($id, Request $request){
 

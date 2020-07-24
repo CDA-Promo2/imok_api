@@ -7,6 +7,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @OA\Schema(
+ *     schema="Appointment",
+ *     type="object",
+ *     title="Appointment",
+ *     @OA\Property(property="date_start", type="string", format="date"),
+ *     @OA\Property(property="note", type="string"),
+ *     @OA\Property(property="feedback", type="string"),
+ *     @OA\Property(property="id_appointment_types", type="integer"),
+ *     @OA\Property(property="id_customers", type="integer"),
+ *     @OA\Property(property="id_employees", type="integer"),
+ *     @OA\Property(property="customer_firstname", type="string"),
+ *     @OA\Property(property="customer_lastname", type="string"),
+ *     @OA\Property(property="employee_firstname", type="string"),
+ *     @OA\Property(property="employee_lastname", type="string"),
+ * )
+ */
 class Appointment extends Model
 {
 

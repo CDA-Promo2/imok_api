@@ -8,7 +8,7 @@ set :repo_url, "https://github.com/CDA-Promo2/imok_api.git"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/clients/client51/web49/web"
+set :deploy_to, "/var/www/clients/client51/web49/web/imok_api"
 
 namespace :deploy do
 
@@ -18,6 +18,8 @@ namespace :deploy do
             within release_path  do
                 execute :composer, "install --no-dev --quiet" # install dependencies
                 execute :chmod, "u+x artisan" # make artisan executable
+                execute :chmod, "-R 775 storage"
+                execute :php, "artisan swagger-lume:generate" #generate api documentation
             end
         end
     end
@@ -35,7 +37,7 @@ end
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml"
+append :linked_files, ".env", ".htaccess"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"

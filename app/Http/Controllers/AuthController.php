@@ -28,6 +28,26 @@ class AuthController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
+     * @OA\Post(path="/auth/login",
+     *  summary="Login",
+     *  tags={"Authentication"},
+     *  @OA\RequestBody(
+     *    required=true,
+     *    description="Each field is required",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="email", type="string"),
+     *       @OA\Property(property="password", type="string", format="password"),
+     *    ),
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Logged in",
+     *  ),
+     *  @OA\Response(
+     *    response=401,
+     *    description="Unauthorized",
+     *  ),
+     * )
      */
     public function login(Request $request){
         $this->validate($request,[
@@ -51,6 +71,15 @@ class AuthController extends Controller
     /**
      * LOGOUT
      * @return JsonResponse
+     * @OA\Post(path="/auth/logout",
+     *  summary="Logout",
+     *  tags={"Authentication"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Successfully logged out",
+     *  ),
+     * )
      */
     public function logout(){
         Auth::logout();
@@ -62,6 +91,15 @@ class AuthController extends Controller
     /**
      * REFRESH TOKEN
      * @return JsonResponse
+     * @OA\Post(path="/auth/refresh",
+     *  summary="Refresh token",
+     *  tags={"Authentication"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=200,
+     *    description="Token refreshed",
+     *  ),
+     * )
      */
     public function refresh(){
         return $this->respondWithToken(Auth::refresh(), Auth::user());
@@ -70,6 +108,15 @@ class AuthController extends Controller
     /**
      * GET USER INFOS
      * @return JsonResponse
+     * @OA\Post(path="/auth/me",
+     *  summary="Who am I",
+     *  tags={"Authentication"},
+     *  security={{"JWT":{}}},
+     *  @OA\Response(
+     *    response=200,
+     *    description="User",
+     *  ),
+     * )
      */
     public function me(){
         return response()->json(Auth::user());
