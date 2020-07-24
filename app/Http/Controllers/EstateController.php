@@ -36,15 +36,15 @@ class EstateController extends Controller
             ['name' => 'id_districts', 'validation' => 'integer|exists:districts,id', 'required' => false],
             ['name' => 'id_expositions', 'validation' => 'integer|exists:expositions,id', 'required' => false],
             ['name' => 'id_estate_types', 'validation' => 'integer||exists:estate_types,id', 'required' => true],
-            ['name' => 'price', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'property_tax', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'size', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'carrez_size', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'housing_tax', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'condominium_fees', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'annual_fees', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'gas_emission', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
-            ['name' => 'energy_consumption', 'validation' => 'regex:/^(?:d*.d{1,2}|d+)$/', 'required' => false],
+            ['name' => 'price', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'property_tax', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'size', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'carrez_size', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'housing_tax', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'condominium_fees', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'annual_fees', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'gas_emission', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
+            ['name' => 'energy_consumption', 'validation' => 'regex:/^\d+(\.\d{1,2})?$/', 'required' => false],
             ['name' => 'rooms_numbers', 'validation' => 'integer', 'required' => false],
             ['name' => 'bedroom_numbers', 'validation' => 'integer', 'required' => false],
             ['name' => 'floor_number', 'validation' => 'integer', 'required' => false],
@@ -90,11 +90,6 @@ class EstateController extends Controller
     /**
      * GET AN ESTATE WHERE LIKE IN ATTR
      * @param Request $request
-     * @param $city
-     * @param string $minBudget
-     * @param string $maxBudget
-     * @param string $minSize
-     * @param string $maxSize
      * @return JsonResponse
      */
     public function getWhere(Request $request)
@@ -129,15 +124,14 @@ class EstateController extends Controller
     public function create(Request $request){
 
         $rules = [];
+
         foreach($this->fields as $field){
             $required = $field['required'] === true ? '|required' : '' ;
             $rules[$field['name']] =  $field['validation'] . $required;
         }
         $this->validate($request, $rules);
 
-
         try{
-
             $estate = new Estate();
             foreach($this->fields as $field){
                 $estate->{$field['name']} = $request->input($field['name']);
@@ -149,13 +143,12 @@ class EstateController extends Controller
                 'estate' => $estate
             ],201);
 
-        }catch(\Exception $e){
-
+        } catch(\Exception $e) {
             return response()->json([
-                'message' => 'Estate could not be created'
+                'message' => $e
+//                'message' => 'Estate could not be created'
             ],409);
         }
-
     }
 
 

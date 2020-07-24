@@ -34,7 +34,7 @@ class CustomerController extends Controller
             ['name' => 'mail', 'validation' => 'email', 'required' => true],
             ['name' => 'id_marital_status', 'validation' => 'integer|exists:marital_status,id', 'required' => true],
             ['name' => 'id_cities', 'validation' => 'integer|exists:cities,id', 'required' => true],
-            ['name' => 'civility', 'validation' => 'boolean', 'required' => true],
+            ['name' => 'civility', 'validation' => 'integer', 'required' => true],
             ['name' => 'birthdate', 'validation' => 'date', 'required' => true],
         ];
     }

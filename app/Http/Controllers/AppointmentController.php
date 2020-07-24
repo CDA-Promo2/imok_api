@@ -16,8 +16,6 @@ use Illuminate\Validation\ValidationException;
  */
 class AppointmentController extends Controller
 {
-
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -44,12 +42,15 @@ class AppointmentController extends Controller
 
     /**
      * GET A APPOINTMENT BY ITS ID
-     * @param $id
+     * @param $id_employees
+     * @param $id_customer
+     * @param $date_start
+     *
      * @return JsonResponse
      */
     public function getOneByIDs($id_employees, $id_customer, $date_start)
     {
-        try{
+        try {
             $appointment = Appointment::where('id_employees', $id_employees)
                                 ->where('date_start', $date_start)
                                 ->where('id_customers', $id_customer)
@@ -57,7 +58,7 @@ class AppointmentController extends Controller
                 return response()->json([
                     'appointment' => $appointment
                 ],200);
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             return response()->json([
                 'message' => 'No match'
             ],404);
@@ -78,7 +79,7 @@ class AppointmentController extends Controller
             return response()->json([
                 'appointments' => $appointments
             ], 200);
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
             return response()->json([
                 'message' => 'No match'
             ], 404);
@@ -98,14 +99,12 @@ class AppointmentController extends Controller
             return response()->json([
                 'appointments' => $appointments
             ], 200);
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
             return response()->json([
                 'message' => 'No match'
             ], 404);
         }
     }
-
-
 
     /**
      * GET A APPOINTMENT WHERE LIKE IN NAME OR MAIL
@@ -114,7 +113,7 @@ class AppointmentController extends Controller
      */
     public function getWhere($arg)
     {
-        try{
+        try {
             $appointment = Appointment::where('id_employees', 'like', '%' . $arg . '%')
                                 ->orWhere('date_start', 'like', '%' . $arg . '%')
                                 ->orWhere('id_customers', 'like', '%' . $arg . '%')
@@ -123,7 +122,7 @@ class AppointmentController extends Controller
                 'appointment' => $appointment
             ],200);
 
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             return response()->json([
                 'message' => 'No match'
             ],404);
@@ -138,35 +137,28 @@ class AppointmentController extends Controller
      * @return JsonResponse
      * @throws ValidationException
      */
-    public function create(Request $request){
-
-
+    public function create(Request $request)
+    {
         $rules = [];
         foreach($this->fields as $field){
             $required = $field['required'] === true ? '|required' : '' ;
             $rules[$field['name']] =  $field['validation'] . $required;
         }
         $this->validate($request, $rules);
-
-
-        try{
-
+        try {
             $appointment = new Appointment();
             foreach($this->fields as $field){
                 $appointment->{$field['name']} = $request->input($field['name']);
             }
             $appointment->save();
-
-
             return response()->json([
                 'message' => 'CREATED',
                 'appointment' => $appointment
             ],201);
-
-        }catch(\Exception $e){
-
+        } catch(\Exception $e) {
             return response()->json([
-                'message' => 'Une erreur est survenu à la création'
+//                'message' => 'Une erreur est survenu à la création'
+                'message' => $e
             ],409);
         }
 
@@ -175,49 +167,45 @@ class AppointmentController extends Controller
     /**
      * UPDATE A APPOINTMENT
      *
+     * @param $id_customer
+     * @param $id_employees
+     * @param $date_start
      * @param Request $request
+     *
      * @return JsonResponse
      * @throws ValidationException
      */
-    public function update($id_customer, $id_employees, $date_start, Request $request) {
-
-        try{
+    public function update($id_customer, $id_employees, $date_start, Request $request)
+    {
+        try {
             $appointment = Appointment::where('id_employees', $id_employees)
                                 ->where('date_start', $date_start)
                                 ->where('id_customers', $id_customer)
                                 ->first();
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             return response()->json([
                 'message' => 'No match'
             ],404);
-
         }
-
         $rules = [];
-        foreach($this->fields as $field){
+        foreach($this->fields as $field) {
             $rules[$field['name']] =  $field['validation'];
         }
         $this->validate($request, $rules);
-
-        try{
-
+        try {
             foreach($this->fields as $field){
                 $appointment->{$field['name']} = $request->input($field['name']) ?? $appointment->{$field['name']} ;
             }
             $appointment->save();
-
             return response()->json([
                 'message' => 'UPDATED',
                 'appointment' => $appointment
             ],201);
-
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
 
             return response()->json([
                 'message' => 'Une erreur est survenu à la modification'
             ],409);
         }
-
     }
-
 }

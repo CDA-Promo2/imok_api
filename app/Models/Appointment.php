@@ -13,7 +13,9 @@ class Appointment extends Model
         public $timestamps = false;
 
         public $incrementing = false;
+
         protected $table = 'appointment_view';
+
         protected $primaryKey = [
                 'id_customers',
                 'id_employees',

@@ -13,6 +13,8 @@ class Employee extends Model implements AuthenticatableContract, AuthorizableCon
 {
     use Authenticatable, Authorizable;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
